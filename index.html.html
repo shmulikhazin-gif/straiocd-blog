@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STRAIOCD Model - International Research Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;600;700&family=Noto+Sans+HE:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            500: '#102a43',
+                            700: '#0b1b2b',
+                            900: '#030c16',
+                            accent: '#00d4ff'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans HE', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-panel {
+            background: rgba(16, 42, 67, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .code-block {
+            background-color: #030c16;
+            font-family: 'Fira Code', monospace;
+        }
+        /* הסתרת באנר ברירת המחדל של גוגל תרגום */
+        .goog-te-banner-frame { display: none !important; }
+        body { top: 0px !important; }
+        #google_translate_element select {
+            background-color: #102a43;
+            color: #ffffff;
+            border: 1px solid #334155;
+            padding: 6px 12px;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            outline: none;
+            cursor: pointer;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b1b2b; }
+        ::-webkit-scrollbar-thumb { background: #102a43; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00d4ff; }
+    </style>
+</head>
+<body class="bg-brand-900 text-slate-100 font-sans min-h-screen flex flex-col antialiased">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand Title -->
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-bold text-xl shadow-lg shadow-cyan-500/20 text-white">
+                        S
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold tracking-wider text-white block">STRAIOCD</span>
+                        <span class="text-xs text-cyan-400 font-mono tracking-widest block">RAW DATA METEOROLOGY PORTAL</span>
+                    </div>
+                </div>
+
+                <!-- Google Translate & New Post Actions -->
+                <div class="flex items-center space-x-4 space-x-reverse">
+                    
+                    <!-- Google Translate Widget Container -->
+                    <div id="google_translate_element"></div>
+
+                    <!-- New Post Button -->
+                    <button onclick="openPostModal()" class="bg-cyan-500 hover:bg-cyan-400 text-brand-900 font-bold px-4 py-2 rounded-lg text-sm transition-all duration-200 flex items-center space-x-2 space-x-reverse shadow-lg shadow-cyan-500/20">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>פרסם מאמר חדש (בעברית)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Academic Model Banner -->
+        <div class="rounded-2xl p-6 sm:p-8 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-700 border border-cyan-500/30 shadow-2xl relative overflow-hidden">
+            <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 space-y-4">
+                <div class="flex flex-wrap items-center gap-3 text-xs font-mono text-cyan-300">
+                    <span class="bg-cyan-950/80 px-3 py-1 rounded-full border border-cyan-500/40">MODEL: STRAIOCD</span>
+                    <span class="bg-slate-900/80 px-3 py-1 rounded-full border border-slate-700">DOI: 10.5281/zenodo.18615544</span>
+                    <span class="bg-slate-900/80 px-3 py-1 rounded-full border border-slate-700">ORCID: 0009-0001-7932-3675</span>
+                </div>
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    ארכיון נתוני גולם ומאמרים מטאורולוגיים
+                </h1>
+                <p class="text-slate-300 max-w-3xl text-sm sm:text-base leading-relaxed">
+                    מערכת פרסום ומחקר בלעדית המבוססת על מדידות לווין, סונדות ותחנות מטאורולוגיות בפועל. כתוב בעברית, ותן למערכת לתרגם אוטומטית לכל שפה בעולם עבור הקוראים שלך.
+                </p>
+            </div>
+        </div>
+
+        <!-- Search Controls -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-between items-center bg-brand-700/50 p-4 rounded-xl border border-slate-800">
+            <div class="relative w-full">
+                <i class="fa-solid fa-magnifying-glass absolute top-3.5 right-3.5 text-slate-400"></i>
+                <input type="text" id="searchInput" oninput="renderPosts()" placeholder="חפש לפי כותרת, תגיות, או נתונים..." class="w-full bg-brand-900 border border-slate-700 rounded-lg pr-10 pl-4 py-2 text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-500">
+            </div>
+        </div>
+
+        <!-- Dynamic Post List Container -->
+        <div id="postsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Posts injected via JavaScript -->
+        </div>
+
+    </main>
+
+    <!-- Modal: New Post Creation Form -->
+    <div id="postModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-brand-700 border border-slate-700 rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl my-8">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-brand-900/50">
+                <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-cyan-400"></i>
+                    <span>פרסום מאמר חדש (בעברית)</span>
+                </h3>
+                <button onclick="closePostModal()" class="text-slate-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <form id="newPostForm" onsubmit="handleSavePost(event)" class="p-6 space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">כותרת המאמר (עברית)</label>
+                    <input type="text" id="postTitle" required class="w-full bg-brand-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">קטגוריה</label>
+                    <select id="postCategory" class="w-full bg-brand-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+                        <option value="דינמיקה סטרטוספרית">דינמיקה סטרטוספרית</option>
+                        <option value="אוזון ואדי מים">אוזון ואדי מים</option>
+                        <option value="מדד התפרצות קוטבית">מדד התפרצות קוטבית</option>
+                        <option value="מדידות לווין בפועל">מדידות לווין בפועל</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">תקציר קצר</label>
+                    <textarea id="postAbstract" rows="2" required class="w-full bg-brand-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">תוכן המאמר המלא (תומך HTML)</label>
+                    <textarea id="postContent" rows="6" required class="w-full bg-brand-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white font-mono focus:outline-none focus:border-cyan-500"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1">מקורות נתונים גולמיים (מופרדים בפסיק)</label>
+                    <input type="text" id="postSources" placeholder="למשל: NOAA-20, METOP-C Sonde Archival 70hPa" class="w-full bg-brand-900 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-cyan-500">
+                </div>
+
+                <div class="pt-4 border-t border-slate-800 flex justify-end space-x-3 space-x-reverse">
+                    <button type="button" onclick="closePostModal()" class="px-4 py-2 rounded-lg text-sm text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700">ביטול</button>
+                    <button type="submit" class="px-5 py-2 rounded-lg text-sm font-bold bg-cyan-500 hover:bg-cyan-400 text-brand-900 shadow-lg shadow-cyan-500/20">שמור ופרסם</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: View Article Full Screen -->
+    <div id="viewModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-brand-700 border border-slate-700 rounded-2xl w-full max-w-4xl overflow-hidden shadow-2xl my-8 flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-brand-900/60">
+                <span id="viewCategory" class="text-xs font-mono bg-cyan-950 text-cyan-400 px-3 py-1 rounded-full border border-cyan-800"></span>
+                <button onclick="closeViewModal()" class="text-slate-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6" id="viewBody">
+                <!-- Injected Article Content -->
+            </div>
+
+            <div class="p-4 border-t border-slate-800 bg-brand-900/60 flex flex-wrap justify-between items-center gap-2 text-xs font-mono text-slate-400">
+                <div>DOI: 10.5281/zenodo.18615544 | ORCID: 0009-0001-7932-3675</div>
+                <div>CREDIT: S-AIOCD / STRAIOCD</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 bg-brand-900 py-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-3">
+            <p class="text-slate-400 text-xs font-mono">
+                © STRAIOCD Model — Academic Meteorological Research Portal
+            </p>
+            <p class="text-slate-500 text-xs">
+                DOI: <a href="https://doi.org/10.5281/zenodo.18615544" target="_blank" class="text-cyan-400 hover:underline">10.5281/zenodo.18615544</a> | ORCID: <a href="https://orcid.org/0009-0001-7932-3675" target="_blank" class="text-cyan-400 hover:underline">0009-0001-7932-3675</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Google Translate Initialization Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'he',
+                includedLanguages: 'en,ru,uk,es,fr,de,zh,ja,ar,he',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <!-- Application Script -->
+    <script>
+        const initialPosts = [
+            {
+                id: 'post-1',
+                title: 'דינמיקה סטרטוספרית כמחוללת האקלים הראשונית',
+                category: 'דינמיקה סטרטוספרית',
+                date: '2026-10-24',
+                abstract: 'תצפית ישירה על וקטורי לחץ סטרטוספריים ברמת 70hPa ואנומליות ריכוז אוזון.',
+                content: `<p class="mb-4">על פי <strong>מודל STRAIOCD</strong>, הסטרטוספירה מתפקדת כגורם הראשוני והבלעדי לכל אירועי שבירת הגלים בטרופוספירה. אנומליות טמפרטורת פני הים (SST) הן תוצאה תרמודינמית פסיבית ולא הגורם הראשי.</p>
+                <div class="code-block p-4 rounded-lg my-4 text-xs text-cyan-400">
+                    # STRAIOCD Raw Sonde Data Ingestion
+                    ds = xarray.open_dataset('NOAA_20_Sonde_70hPa_2026.nc')
+                    polar_index = ds['O3_concentration'].sel(level=70) * ds['u_wind']
+                </div>
+                <p>טלמטריית לוויין תצפיתית מאשרת שהזרקות מומנטום סטרטוספריות מקדימות את הציקלוגנזה הטרופית ב-96 עד 120 שעות.</p>`,
+                sources: ['לוויין NOAA-20', 'ארכיון סונדות METOP-C 70hPa']
+            }
+        ];
+
+        function getPosts() {
+            const stored = localStorage.getItem('straiocd_posts');
+            if (!stored) {
+                localStorage.setItem('straiocd_posts', JSON.stringify(initialPosts));
+                return initialPosts;
+            }
+            return JSON.parse(stored);
+        }
+
+        function savePostToStorage(post) {
+            const posts = getPosts();
+            posts.unshift(post);
+            localStorage.setItem('straiocd_posts', JSON.stringify(posts));
+        }
+
+        function deletePost(id) {
+            if (!confirm('האם אתה בטוח שברצונך למחוק מאמר זה?')) return;
+            const posts = getPosts().filter(p => p.id !== id);
+            localStorage.setItem('straiocd_posts', JSON.stringify(posts));
+            renderPosts();
+        }
+
+        function renderPosts() {
+            const container = document.getElementById('postsContainer');
+            const searchVal = document.getElementById('searchInput').value.toLowerCase();
+            const posts = getPosts().filter(post => 
+                post.title.toLowerCase().includes(searchVal) || 
+                post.abstract.toLowerCase().includes(searchVal) ||
+                post.category.toLowerCase().includes(searchVal)
+            );
+
+            if (posts.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-16 bg-brand-700/30 rounded-2xl border border-slate-800">
+                        <i class="fa-solid fa-folder-open text-4xl text-slate-600 mb-3"></i>
+                        <p class="text-slate-400">לא נמצאו מאמרים התואמים את החיפוש.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = posts.map(post => {
+                const sourcesList = Array.isArray(post.sources) ? post.sources.join(', ') : (post.sources || 'נתוני לוויין גולמיים');
+
+                return `
+                <article class="bg-brand-700 border border-slate-800 rounded-xl p-6 flex flex-col justify-between hover:border-cyan-500/50 transition-all duration-300 shadow-xl group">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center text-xs font-mono">
+                            <span class="bg-cyan-950 text-cyan-400 px-2.5 py-1 rounded-md border border-cyan-800/60">${post.category}</span>
+                            <span class="text-slate-400">${post.date}</span>
+                        </div>
+                        <h2 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors line-clamp-2">${post.title}</h2>
+                        <p class="text-slate-300 text-sm leading-relaxed line-clamp-3">${post.abstract}</p>
+                    </div>
+
+                    <div class="pt-6 mt-6 border-t border-slate-800/80 space-y-4">
+                        <div class="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+                            <i class="fa-solid fa-satellite-dish text-cyan-400"></i>
+                            <span class="truncate">${sourcesList}</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button onclick="openViewModal('${post.id}')" class="text-xs font-bold text-cyan-400 hover:text-cyan-300 flex items-center gap-1">
+                                <span>קרא מאמר מלא</span>
+                                <i class="fa-solid fa-arrow-left text-xs"></i>
+                            </button>
+                            <button onclick="deletePost('${post.id}')" class="text-slate-500 hover:text-rose-400 text-xs transition-colors px-2 py-1">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+                `;
+            }).join('');
+        }
+
+        function openPostModal() {
+            document.getElementById('postModal').classList.remove('hidden');
+        }
+
+        function closePostModal() {
+            document.getElementById('postModal').classList.add('hidden');
+            document.getElementById('newPostForm').reset();
+        }
+
+        function handleSavePost(event) {
+            event.preventDefault();
+            const sourcesInput = document.getElementById('postSources').value;
+            
+            const newPost = {
+                id: 'post-' + Date.now(),
+                title: document.getElementById('postTitle').value,
+                category: document.getElementById('postCategory').value,
+                date: new Date().toISOString().split('T')[0],
+                abstract: document.getElementById('postAbstract').value,
+                content: document.getElementById('postContent').value,
+                sources: sourcesInput ? sourcesInput.split(',').map(s => s.trim()) : ['טלמטריית לוויין']
+            };
+
+            savePostToStorage(newPost);
+            closePostModal();
+            renderPosts();
+        }
+
+        function openViewModal(id) {
+            const post = getPosts().find(p => p.id === id);
+            if (!post) return;
+
+            const viewBody = document.getElementById('viewBody');
+            document.getElementById('viewCategory').innerText = post.category;
+
+            viewBody.innerHTML = `
+                <div class="space-y-4">
+                    <div class="text-xs font-mono text-cyan-400">DATE: ${post.date} | SOURCE: HEBREW</div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-white">${post.title}</h1>
+                    <div class="p-4 rounded-xl bg-brand-900/80 border border-slate-800 text-slate-300 text-sm italic">
+                        ${post.abstract}
+                    </div>
+                </div>
+                <div class="prose prose-invert max-w-none text-slate-200 leading-relaxed text-sm sm:text-base space-y-4 pt-4 border-t border-slate-800">
+                    ${post.content}
+                </div>
+                <div class="pt-6 border-t border-slate-800">
+                    <h4 class="text-xs font-mono text-slate-400 mb-2">RAW DATA SOURCES / METEOROLOGICAL INSTRUMENTS:</h4>
+                    <div class="flex flex-wrap gap-2">
+                        ${(Array.isArray(post.sources) ? post.sources : [post.sources]).map(s => `<span class="bg-brand-900 text-cyan-300 text-xs font-mono px-3 py-1 rounded-md border border-slate-700">${s}</span>`).join('')}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('viewModal').classList.remove('hidden');
+        }
+
+        function closeViewModal() {
+            document.getElementById('viewModal').classList.add('hidden');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderPosts();
+        });
+    </script>
+</body>
+</html>
